@@ -137,3 +137,5 @@ for (let i = 0; i < tombolDelete.length; i++) {
 // ! LOGIC MODAL
 let pembelianButton = document.getElementsByClassName('custom-btn')[0];
 pembelianButton.addEventListener('click', function () {});
+
+//
