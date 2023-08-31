@@ -38,6 +38,7 @@ let gamesData2 = [
 
 // RENDER CARD BERDASARKAN DATA
 function renderCart(array) {
+  // MUNCULIN CARD KE CONTAINER => START
   let cardContainer = document.querySelector('tbody');
   cardContainer.innerHTML = '';
   for (let i = 0; i < array.length; i++) {
@@ -71,13 +72,32 @@ function renderCart(array) {
       </td>
       </tr>`;
   }
+  // MUNCULIN CARD KE CONTAINER => END
 
-  //   let ringkasanPembelian = document.getElementsByClassName('flex-tween')[0];
-  //   let totalBarang = ringkasanPembelian.querySelectorAll('div')[0];
-  //   totalBarang.innerHTML = `(${gamesData2.length} Barang)`;
+  //   TOTAL BARANG => START
+  let ringkasanPembelian = document.getElementsByClassName('flex-tween')[0];
+  let totalBarang = ringkasanPembelian.querySelectorAll('div')[0];
+  totalBarang.innerHTML = `(${array.length} Barang)`;
+  //   TOTAL BARANG => END
 
-  //   let totalHarga = ringkasanPembelian.querySelectorAll('div')[1];
-  //   totalHarga.innerHTML;
+  //   TOTAL HARGA => START
+  let totalHarga = ringkasanPembelian.querySelectorAll('div')[1];
+  let totalHargaNumber = 0;
+  //   UBAH FORMAT HARGA STRING KE HARGA NUMBER
+  for (let i = 0; i < array.length; i++) {
+    let numberString = array[i].price.replace(/[^\d]/g, ''); // menghapus 'Rp', '.' , ' '
+    totalHargaNumber += Number(numberString);
+  }
+  //   UBAH FORMAT HARGA NUMBER KE HARGA STRING
+  let totalHargaString = 'Rp. ' + totalHargaNumber.toLocaleString('id-ID');
+  totalHarga.innerHTML = totalHargaString;
+  //   TOTAL HARGA => END
+
+  //   TOTAL HARGA 2 => START
+  let ringkasanBayar = document.getElementsByClassName('flex-tween')[1];
+  let totalBayar = ringkasanBayar.querySelectorAll('div')[1];
+  totalBayar.innerHTML = totalHargaString;
+  //   TOTAL HARGA 2 => END
 }
 
 renderCart(gamesData2);
@@ -87,7 +107,7 @@ let deleteObject = function (data, value) {
   for (let i = 0; i < data.length; i++) {
     if (data[i].id === value) {
       data.splice(i, 1);
-      //   break;
+      break;
     }
   }
   renderCart(data);
@@ -113,3 +133,7 @@ for (let i = 0; i < tombolDelete.length; i++) {
     deleteObject(gamesData2, Number(tombolDelete[i].id));
   });
 }
+
+// ! LOGIC MODAL
+let pembelianButton = document.getElementsByClassName('custom-btn')[0];
+pembelianButton.addEventListener('click', function () {});
